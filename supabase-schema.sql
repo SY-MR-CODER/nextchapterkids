@@ -1,4 +1,4 @@
--- Create users table
+-- Create users table - Enhanced for full Supabase integration
 CREATE TABLE users (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     parent_name VARCHAR(255) NOT NULL,
@@ -9,6 +9,21 @@ CREATE TABLE users (
     stories_this_month INTEGER DEFAULT 0,
     subscription_reset_date TIMESTAMP DEFAULT (NOW() + INTERVAL '30 days'),
     stripe_customer_id VARCHAR(255),
+    last_login TIMESTAMP,
+    is_active BOOLEAN DEFAULT true,
+    email_verified BOOLEAN DEFAULT false,
+    profile_image_url TEXT,
+    preferences JSONB DEFAULT '{}',
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Create user profiles table for additional data
+CREATE TABLE user_profiles (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    preferences JSONB DEFAULT '{}',
+    settings JSONB DEFAULT '{}',
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );

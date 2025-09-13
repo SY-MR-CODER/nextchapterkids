@@ -713,29 +713,58 @@ app.post('/api/register', async (req, res) => {
             return res.status(400).json({ error: 'All fields are required' });
         }
 
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ error: 'Invalid email format' });
+        }
+
+        // Validate password strength
+        if (password.length < 6) {
+            return res.status(400).json({ error: 'Password must be at least 6 characters long' });
+        }
+
         // Check if user already exists
         const existingUser = await getUserByEmail(email);
         if (existingUser) {
             console.log('Email already exists:', email);
-            return res.status(400).json({ error: 'Email already registered' });
+            return res.status(400).json({ error: 'An account with this email already exists' });
         }
 
-        // Create new user
+        // Create new user with full Supabase integration
         const newUser = await createUser(parentName, email, password);
         console.log('User registered successfully:', email);
 
+        // Generate JWT token
+        const token = jwt.sign(
+            { 
+                userId: newUser.id, 
+                email: newUser.email,
+                parentName: newUser.parent_name 
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: '7d' }
+        );
+
         res.json({ 
             success: true, 
-            userId: newUser.id, 
-            parentName: newUser.parent_name 
+            message: 'Account created successfully! Welcome to NextChapterKids!',
+            user: {
+                id: newUser.id,
+                userId: newUser.id,
+                parentName: newUser.parent_name,
+                email: newUser.email,
+                subscriptionPlan: newUser.subscription_plan || 'free'
+            },
+            token: token
         });
     } catch (error) {
         console.error('Registration error:', error);
-        res.status(500).json({ error: 'Registration failed' });
+        res.status(500).json({ error: 'Registration failed. Please try again.' });
     }
 });
 
-// User login endpoint
+// User login endpoint - Full Supabase Integration
 app.post('/api/login', async (req, res) => {
     try {
         console.log('Login request received:', req.body);
@@ -760,15 +789,42 @@ app.post('/api/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid email or password' });
         }
 
+        // Update last login time
+        await supabase
+            .from('users')
+            .update({ 
+                last_login: new Date().toISOString(),
+                updated_at: new Date().toISOString()
+            })
+            .eq('id', user.id);
+
+        // Generate JWT token
+        const token = jwt.sign(
+            { 
+                userId: user.id, 
+                email: user.email,
+                parentName: user.parent_name 
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: '7d' }
+        );
+
         console.log('Login successful for:', email);
         res.json({ 
             success: true, 
-            userId: user.id, 
-            parentName: user.parent_name 
+            message: 'Login successful! Welcome back!',
+            user: {
+                id: user.id,
+                userId: user.id,
+                parentName: user.parent_name,
+                email: user.email,
+                subscriptionPlan: user.subscription_plan || 'free'
+            },
+            token: token
         });
     } catch (error) {
         console.error('Login error:', error);
-        res.status(500).json({ error: 'Login failed' });
+        res.status(500).json({ error: 'Login failed. Please try again.' });
     }
 });
 
@@ -809,10 +865,73 @@ app.post('/api/add-child', async (req, res) => {
 // Get user data endpoint
 app.get('/api/user/:email', async (req, res) => {
     try {
-        const user = await getUserByEmail(req.params.email);
-        if (!user) {
+        const email = req.params.email;
+        console.log('Getting user data for:', email);
+        
+        // Get user with full profile data from Supabase
+        const { data: user, error: userError } = await supabase
+            .from('users')
+            .select(`
+                id,
+                parent_name,
+                email,
+                subscription_plan,
+                stories_this_month,
+                created_at,
+                last_login,
+                is_active
+            `)
+            .eq('email', email.toLowerCase())
+            .single();
+
+        if (userError || !user) {
+            console.log('User not found:', email, userError);
             return res.status(404).json({ error: 'User not found' });
         }
+
+        // Get user's children with their stories from Supabase
+        const { data: children, error: childrenError } = await supabase
+            .from('children')
+            .select(`
+                id,
+                name,
+                age,
+                reading_level,
+                interests,
+                favorite_books,
+                created_at
+            `)
+            .eq('user_id', user.id)
+            .order('created_at', { ascending: false });
+
+        if (childrenError) {
+            console.error('Error fetching children:', childrenError);
+        }
+
+        // Get stories count for each child
+        const childrenWithStories = await Promise.all(
+            (children || []).map(async (child) => {
+                const { count } = await supabase
+                    .from('stories')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('child_id', child.id);
+                
+                return {
+                    ...child,
+                    stories_generated: count || 0,
+                    storiesGenerated: count || 0 // For backward compatibility
+                };
+            })
+        );
+
+        // Get user's total stories count
+        const { count: totalStories } = await supabase
+            .from('stories')
+            .select('*', { count: 'exact', head: true })
+            .eq('user_id', user.id);
+
+        console.log('Found children:', childrenWithStories?.length || 0);
+        console.log('Total stories:', totalStories || 0);
 
         // Transform data to match frontend expectations
         const userData = {
@@ -820,12 +939,14 @@ app.get('/api/user/:email', async (req, res) => {
             parentName: user.parent_name,
             email: user.email,
             subscription: {
-                plan: user.subscription_plan,
-                status: user.subscription_status,
-                storiesThisMonth: user.stories_this_month,
-                resetDate: user.subscription_reset_date
+                plan: user.subscription_plan || 'free',
+                storiesThisMonth: user.stories_this_month || 0
             },
-            children: user.children || [],
+            children: childrenWithStories || [],
+            totalStories: totalStories || 0,
+            memberSince: user.created_at,
+            lastLogin: user.last_login,
+            isActive: user.is_active,
             createdAt: user.created_at
         };
 

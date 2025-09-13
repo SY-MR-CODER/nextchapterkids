@@ -33,17 +33,31 @@ window.showScreen = showScreen;
 
 // Initialize App
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🌟 StoryMagic App Initializing...');
+    console.log('🌟 NextChapterKids App Initializing...');
     
-    // Ensure welcome screen is shown initially
-    showScreen('welcomeScreen');
+    // Clear any URL parameters that might contain sensitive data
+    if (window.location.search) {
+        const url = new URL(window.location);
+        url.search = '';
+        window.history.replaceState({}, document.title, url.pathname);
+    }
     
-    // Check if user is logged in (simple session check)
+    // Check if user is logged in (secure session check)
     const savedUser = localStorage.getItem('currentUser');
-    if (savedUser) {
-        console.log('Found saved user, loading dashboard...');
-        currentUser = JSON.parse(savedUser);
-        loadDashboard();
+    const authToken = localStorage.getItem('authToken');
+    
+    if (savedUser && authToken) {
+        try {
+            currentUser = JSON.parse(savedUser);
+            console.log('Found saved user, loading dashboard...');
+            loadDashboard();
+        } catch (error) {
+            console.error('Error parsing saved user:', error);
+            // Clear corrupted data
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('authToken');
+            showScreen('welcomeScreen');
+        }
     } else {
         console.log('No saved user, showing welcome screen...');
         showScreen('welcomeScreen');
@@ -499,17 +513,36 @@ async function handleLogin(e) {
         const data = await response.json();
         console.log('Login response data:', data);
         
-        if (data.success) {
-            currentUser = { email, parentName: data.parentName, userId: data.userId };
+        if (data.success && data.user) {
+            // Store user data properly (not in URL)
+            currentUser = {
+                id: data.user.id,
+                email: data.user.email,
+                parentName: data.user.parentName,
+                subscriptionPlan: data.user.subscriptionPlan,
+                token: data.token
+            };
+            
+            // Store in localStorage securely
             localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            showNotification('🎉 Welcome back, ' + data.parentName + '! Loading your magical dashboard...', 'success');
-            loadDashboard();
+            localStorage.setItem('authToken', data.token);
+            
+            showNotification('🎉 ' + (data.message || 'Welcome back!'), 'success');
+            
+            // Clear form
+            e.target.reset();
+            
+            // Navigate to dashboard after a brief delay
+            setTimeout(() => {
+                loadDashboard();
+            }, 1000);
+            
         } else {
             showNotification('❌ ' + (data.error || 'Login failed. Please check your credentials.'), 'error');
         }
     } catch (error) {
         console.error('Login error:', error);
-        showNotification('❌ Login failed. Please check if the server is running and try again.', 'error');
+        showNotification('❌ Login failed. Please check your connection and try again.', 'error');
     } finally {
         // Reset button
         submitBtn.textContent = originalText;
@@ -535,6 +568,13 @@ async function handleSignup(e) {
         return;
     }
 
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        showNotification('📧 Please enter a valid email address!', 'warning');
+        return;
+    }
+
     // Show loading state
     const submitBtn = e.target.querySelector('button[type="submit"]');
     const originalText = submitBtn.textContent;
@@ -553,17 +593,36 @@ async function handleSignup(e) {
         const data = await response.json();
         console.log('Signup response data:', data);
         
-        if (data.success) {
-            currentUser = { email, parentName: data.parentName, userId: data.userId };
+        if (data.success && data.user) {
+            // Store user data properly (not in URL)
+            currentUser = {
+                id: data.user.id,
+                email: data.user.email,
+                parentName: data.user.parentName,
+                subscriptionPlan: data.user.subscriptionPlan,
+                token: data.token
+            };
+            
+            // Store in localStorage securely
             localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            showNotification('🎉 Account created successfully! Welcome to StoryMagic, ' + data.parentName + '!', 'success');
-            loadDashboard();
+            localStorage.setItem('authToken', data.token);
+            
+            showNotification('🎉 ' + (data.message || 'Account created successfully!'), 'success');
+            
+            // Clear form
+            e.target.reset();
+            
+            // Navigate to dashboard after a brief delay
+            setTimeout(() => {
+                loadDashboard();
+            }, 1000);
+            
         } else {
             showNotification('❌ ' + (data.error || 'Registration failed. Please try again.'), 'error');
         }
     } catch (error) {
         console.error('Signup error:', error);
-        showNotification('❌ Registration failed. Please check if the server is running and try again.', 'error');
+        showNotification('❌ Registration failed. Please check your connection and try again.', 'error');
     } finally {
         // Reset button
         submitBtn.textContent = originalText;
@@ -572,11 +631,29 @@ async function handleSignup(e) {
 }
 
 function handleLogout() {
+    // Clear all user data
     currentUser = null;
     currentChild = null;
+    
+    // Clear localStorage completely
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('currentStory');
+    
+    // Clear any URL parameters
+    if (window.location.search) {
+        const url = new URL(window.location);
+        url.search = '';
+        window.history.replaceState({}, document.title, url.pathname);
+    }
+    
+    // Clear any session storage
+    sessionStorage.clear();
+    
     showNotification('👋 See you later! Come back soon for more magical stories!', 'info');
     showScreen('welcomeScreen');
+    
+    console.log('User logged out successfully');
 }
 
 // Fun notification system
@@ -625,23 +702,61 @@ function showNotification(message, type = 'info') {
 
 // Dashboard Functions
 async function loadDashboard() {
-    if (!currentUser) return;
+    if (!currentUser) {
+        console.log('No current user, redirecting to welcome');
+        showScreen('welcomeScreen');
+        return;
+    }
 
     try {
-        const response = await fetch(`/api/user/${currentUser.email}`);
+        console.log('Loading dashboard for user:', currentUser.email);
+        
+        // Get user data with auth token
+        const token = localStorage.getItem('authToken');
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+        
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+        
+        const response = await fetch(`/api/user/${currentUser.email}`, {
+            headers: headers
+        });
+        
         const userData = await response.json();
         
         if (userData.error) {
+            console.error('Dashboard load error:', userData.error);
             handleLogout();
             return;
         }
 
-        document.getElementById('parentNameDisplay').textContent = userData.parentName;
+        // Update UI with user data
+        const parentNameDisplay = document.getElementById('parentNameDisplay');
+        if (parentNameDisplay) {
+            parentNameDisplay.textContent = userData.parentName || currentUser.parentName;
+        }
+        
+        // Display children and stories
         displayChildren(userData.children || []);
+        
+        // Show dashboard screen
         showScreen('dashboardScreen');
+        
+        console.log('Dashboard loaded successfully');
+        
     } catch (error) {
         console.error('Load dashboard error:', error);
-        alert('Failed to load dashboard');
+        showNotification('❌ Failed to load dashboard. Please try refreshing the page.', 'error');
+        
+        // Fallback: show dashboard with current user data
+        const parentNameDisplay = document.getElementById('parentNameDisplay');
+        if (parentNameDisplay && currentUser) {
+            parentNameDisplay.textContent = currentUser.parentName;
+        }
+        showScreen('dashboardScreen');
     }
 }
 
