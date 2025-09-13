@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoryMagic - Personalized Stories for Your Child</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="screen active">
+        <div class="container">
+            <header class="welcome-header">
+                <div class="hero-content">
+                    <h1>📚 StoryMagic ✨</h1>
+                    <p class="tagline">Create personalized, AI-powered stories that make your child the hero of their own magical adventure</p>
+                    
+                    <div class="hero-illustration">
+                        <div class="floating-books">
+                            <span class="book">📖</span>
+                            <span class="book">📚</span>
+                            <span class="book">📕</span>
+                            <span class="book">📗</span>
+                            <span class="book">📘</span>
+                        </div>
+                        <div class="magic-wand">✨🪄✨</div>
+                    </div>
+
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h3>Personalized Stories</h3>
+                            <p>Every story is uniquely crafted based on your child's favorite books, characters, and interests</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🤖</div>
+                            <h3>AI-Powered Magic</h3>
+                            <p>Advanced AI creates engaging, creative stories that spark imagination and wonder</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📖</div>
+                            <h3>Age-Appropriate</h3>
+                            <p>Stories adapt to your child's reading level and age for the perfect experience</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🌟</div>
+                            <h3>Your Child is the Hero</h3>
+                            <p>Every adventure puts your child at the center, building confidence and self-esteem</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="testimonials">
+                <h2>Parents Love StoryMagic</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"My daughter Emma absolutely loves her personalized stories! She asks for a new adventure every night."</p>
+                        <span class="author">- Sarah M., Mom of 2</span>
+                    </div>
+                    <div class="testimonial">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"The stories are so creative and perfectly match my son's interests in dinosaurs and space. Amazing!"</p>
+                        <span class="author">- Mike D., Dad of 1</span>
+                    </div>
+                    <div class="testimonial">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Finally, bedtime stories that my kids are excited about. The AI creates such magical adventures!"</p>
+                        <span class="author">- Jennifer L., Mom of 3</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2>Start Creating Magical Stories Today</h2>
+                <p>Join thousands of parents creating personalized adventures for their children</p>
+                <div class="auth-buttons">
+                    <button id="signupBtn" class="btn btn-primary large">🚀 Create Free Account</button>
+                    <button id="loginBtn" class="btn btn-outline large">Sign In</button>
+                </div>
+                <p class="free-trial">✨ Free to start • No credit card required • Unlimited stories</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="loginScreen" class="screen">
+        <div class="container">
+            <div class="auth-form">
+                <h2>Welcome Back!</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" name="password" required>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #e6fffa, #f0fff4); padding: 10px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #2ed573;">
+                        <p style="margin: 0; font-size: 12px; color: #2d3436;">
+                            <strong>🎯 Try the demo accounts:</strong><br>
+                            <strong>Free Plan:</strong> <code>test@example.com</code> / <code>test123</code><br>
+                            <strong>Premium Plan:</strong> <code>premium@example.com</code> / <code>premium123</code>
+                        </p>
+                    </div>
+                    <button type="submit" class="btn btn-primary full-width">Sign In</button>
+                </form>
+                <p class="auth-switch">Don't have an account? <a href="#" id="switchToSignup">Sign up here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Screen -->
+    <div id="signupScreen" class="screen">
+        <div class="container">
+            <div class="auth-form">
+                <h2>Create Your Account</h2>
+                <p class="subtitle">Start creating magical stories for your children</p>
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="parentName">Your Name</label>
+                        <input type="text" id="parentName" name="parentName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" name="password" placeholder="Create a password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary full-width">Create Account</button>
+                </form>
+                <p class="auth-switch">Already have an account? <a href="#" id="switchToLogin">Sign in here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pricing Screen -->
+    <div id="pricingScreen" class="screen">
+        <div class="container">
+            <div class="pricing-header">
+                <button id="backToDashboardFromPricing" class="btn btn-outline">← Back to Dashboard</button>
+                <h2>Choose Your Plan</h2>
+                <p>Unlock more magical stories for your children</p>
+            </div>
+            
+            <div id="pricingPlans" class="pricing-grid">
+                <!-- Plans will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div id="dashboardScreen" class="screen">
+        <div class="container">
+            <header class="dashboard-header">
+                <div class="header-content">
+                    <div class="welcome-section">
+                        <h1>Welcome back, <span id="parentNameDisplay"></span>! 👋</h1>
+                        <p class="welcome-subtitle">Ready to create some magical stories today?</p>
+                    </div>
+                    <button id="logoutBtn" class="btn btn-outline">Sign Out</button>
+                </div>
+            </header>
+
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-content">
+                        <h3 id="totalStories">0</h3>
+                        <p>Stories Created</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👶</div>
+                    <div class="stat-content">
+                        <h3 id="totalChildren">0</h3>
+                        <p>Children Added</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-content">
+                        <h3>Premium</h3>
+                        <p>Account Status</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="children-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <h2>Your Children 👨‍👩‍👧‍👦</h2>
+                            <p>Create personalized stories for each of your little ones</p>
+                        </div>
+                        <button id="addChildBtn" class="btn btn-primary">
+                            <span>➕ Add Child</span>
+                        </button>
+                    </div>
+                    <div id="childrenList" class="children-grid">
+                        <!-- Children will be populated here -->
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="action-grid">
+                        <div class="action-card">
+                            <div class="action-icon">🎲</div>
+                            <h4>Random Story</h4>
+                            <p>Generate a surprise story for any child</p>
+                            <button class="btn btn-secondary small" onclick="generateRandomStory()">Try It</button>
+                        </div>
+                        <div class="action-card">
+                            <div class="action-icon">📖</div>
+                            <h4>Story Library</h4>
+                            <p>Browse all your created stories</p>
+                            <button class="btn btn-secondary small" onclick="viewStoryLibrary()">View All</button>
+                        </div>
+                        <div class="action-card">
+                            <div class="action-icon">⚙️</div>
+                            <h4>Settings</h4>
+                            <p>Manage your account and preferences</p>
+                            <button class="btn btn-secondary small" onclick="openSettings()">Settings</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tips-section">
+                    <h3>💡 Story Creation Tips</h3>
+                    <div class="tips-grid">
+                        <div class="tip">
+                            <span class="tip-icon">🎯</span>
+                            <p><strong>Be Specific:</strong> The more details about your child's interests, the better the story!</p>
+                        </div>
+                        <div class="tip">
+                            <span class="tip-icon">📚</span>
+                            <p><strong>Mix Favorites:</strong> Combine different books and characters for unique adventures.</p>
+                        </div>
+                        <div class="tip">
+                            <span class="tip-icon">🌟</span>
+                            <p><strong>Try Different Themes:</strong> Explore space, underwater worlds, magical forests, and more!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Child Screen -->
+    <div id="addChildScreen" class="screen">
+        <div class="container">
+            <div class="form-container">
+                <div class="form-header">
+                    <button id="backToDashboard" class="btn btn-outline">← Back</button>
+                    <h2>Add Your Child</h2>
+                </div>
+                
+                <form id="addChildForm" class="child-form">
+                    <div class="form-group">
+                        <label for="childName">Child's Name</label>
+                        <input type="text" id="childName" name="childName" placeholder="Enter your child's name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="childAge">Age</label>
+                        <select id="childAge" name="age" required>
+                            <option value="">Select age</option>
+                            <option value="3">3 years old</option>
+                            <option value="4">4 years old</option>
+                            <option value="5">5 years old</option>
+                            <option value="6">6 years old</option>
+                            <option value="7">7 years old</option>
+                            <option value="8">8 years old</option>
+                            <option value="9">9 years old</option>
+                            <option value="10">10 years old</option>
+                            <option value="11">11 years old</option>
+                            <option value="12">12 years old</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="readingLevel">Reading Level</label>
+                        <select id="readingLevel" name="readingLevel" required>
+                            <option value="">Select reading level</option>
+                            <option value="beginner">Beginner (just learning to read)</option>
+                            <option value="intermediate">Intermediate (reads simple books)</option>
+                            <option value="advanced">Advanced (reads chapter books)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookSearch">Favorite Books, Movies & Shows</label>
+                        <div class="book-search-container">
+                            <input type="text" id="bookSearch" placeholder="Type to search for books, movies, or shows..." autocomplete="off">
+                            <div id="bookSuggestions" class="book-suggestions"></div>
+                        </div>
+                        <div id="selectedBooks" class="selected-books">
+                            <!-- Selected books will appear here -->
+                        </div>
+                        <small>💡 Type names like "Harry Potter", "Frozen", "Peppa Pig", etc. and click to add them</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interests">What does your child love? (interests, hobbies, favorite things)</label>
+                        <textarea id="interests" name="interests" placeholder="e.g., dinosaurs, princesses, space, animals, sports, art..." rows="3"></textarea>
+                        <small>This helps us create more personalized stories</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary full-width">Add Child</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Story Creation Screen -->
+    <div id="storyScreen" class="screen">
+        <div class="container">
+            <div class="story-container">
+                <div class="story-header">
+                    <button id="backToChild" class="btn btn-outline">← Back</button>
+                    <h2>✨ Create Story for <span id="storyChildName"></span></h2>
+                </div>
+
+                <div id="storyPrompt" class="story-prompt">
+                    <div class="story-intro">
+                        <div class="child-avatar">👧</div>
+                        <h3>What magical adventure should <span class="child-name-placeholder"></span> have today?</h3>
+                        <p class="story-description">Our AI will create a personalized story featuring <span class="child-name-placeholder"></span> as the brave hero!</p>
+                    </div>
+
+                    <div class="story-options">
+                        <h4>📖 Story Customization</h4>
+                        
+                        <div class="customization-section">
+                            <label>Adventure Type</label>
+                            <div class="adventure-types">
+                                <button class="adventure-btn" data-type="fantasy">🏰 Fantasy Kingdom</button>
+                                <button class="adventure-btn" data-type="space">🚀 Space Adventure</button>
+                                <button class="adventure-btn" data-type="underwater">🌊 Underwater World</button>
+                                <button class="adventure-btn" data-type="forest">🌲 Magical Forest</button>
+                                <button class="adventure-btn" data-type="dinosaur">🦕 Dinosaur Land</button>
+                                <button class="adventure-btn" data-type="superhero">🦸‍♀️ Superhero Mission</button>
+                                <button class="adventure-btn" data-type="pirate">🏴‍☠️ Pirate Adventure</button>
+                                <button class="adventure-btn" data-type="ninja">🥷 Ninja Quest</button>
+                                <button class="adventure-btn" data-type="wizard">🧙‍♂️ Wizard School</button>
+                                <button class="adventure-btn" data-type="princess">👸 Princess Castle</button>
+                                <button class="adventure-btn" data-type="robot">🤖 Robot World</button>
+                                <button class="adventure-btn" data-type="alien">👽 Alien Planet</button>
+                                <button class="adventure-btn" data-type="jungle">🐅 Jungle Safari</button>
+                                <button class="adventure-btn" data-type="arctic">🐧 Arctic Adventure</button>
+                                <button class="adventure-btn" data-type="desert">🐪 Desert Quest</button>
+                                <button class="adventure-btn" data-type="mountain">⛰️ Mountain Climb</button>
+                                <button class="adventure-btn" data-type="circus">🎪 Circus Fun</button>
+                                <button class="adventure-btn" data-type="farm">🚜 Farm Adventure</button>
+                                <button class="adventure-btn" data-type="city">🏙️ City Explorer</button>
+                                <button class="adventure-btn" data-type="beach">🏖️ Beach Adventure</button>
+                                <button class="adventure-btn" data-type="carnival">🎠 Carnival Magic</button>
+                                <button class="adventure-btn" data-type="museum">🏛️ Museum Mystery</button>
+                                <button class="adventure-btn" data-type="library">📚 Library Quest</button>
+                                <button class="adventure-btn" data-type="bakery">🧁 Bakery Magic</button>
+                                <button class="adventure-btn" data-type="garden">🌻 Secret Garden</button>
+                                <button class="adventure-btn" data-type="treehouse">🏠 Treehouse Club</button>
+                                <button class="adventure-btn" data-type="playground">🛝 Playground Fun</button>
+                                <button class="adventure-btn" data-type="school">🎒 School Adventure</button>
+                                <button class="adventure-btn" data-type="hospital">🏥 Hospital Heroes</button>
+                                <button class="adventure-btn" data-type="fire">🚒 Fire Station</button>
+                                <button class="adventure-btn" data-type="police">👮‍♀️ Police Adventure</button>
+                                <button class="adventure-btn" data-type="vet">🐕‍🦺 Veterinarian</button>
+                                <button class="adventure-btn" data-type="chef">👨‍🍳 Chef Kitchen</button>
+                                <button class="adventure-btn" data-type="artist">🎨 Art Studio</button>
+                                <button class="adventure-btn" data-type="musician">🎵 Music Adventure</button>
+                                <button class="adventure-btn" data-type="dancer">💃 Dance Party</button>
+                                <button class="adventure-btn" data-type="inventor">🔬 Inventor Lab</button>
+                                <button class="adventure-btn" data-type="detective">🔍 Detective Case</button>
+                                <button class="adventure-btn" data-type="time">⏰ Time Travel</button>
+                                <button class="adventure-btn" data-type="fairy">🧚‍♀️ Fairy Tale</button>
+                                <button class="adventure-btn" data-type="dragon">🐲 Dragon Friend</button>
+                                <button class="adventure-btn" data-type="unicorn">🦄 Unicorn Magic</button>
+                                <button class="adventure-btn" data-type="mermaid">🧜‍♀️ Mermaid Ocean</button>
+                                <button class="adventure-btn" data-type="ghost">👻 Friendly Ghost</button>
+                                <button class="adventure-btn" data-type="monster">👹 Monster Friend</button>
+                                <button class="adventure-btn" data-type="toy">🧸 Toy Adventure</button>
+                                <button class="adventure-btn" data-type="candy">🍭 Candy Land</button>
+                                <button class="adventure-btn" data-type="ice">❄️ Ice Palace</button>
+                                <button class="adventure-btn" data-type="volcano">🌋 Volcano Quest</button>
+                                <button class="adventure-btn" data-type="cloud">☁️ Cloud Kingdom</button>
+                                <button class="adventure-btn" data-type="rainbow">🌈 Rainbow Bridge</button>
+                            </div>
+                        </div>
+
+                        <div class="customization-section">
+                            <label for="storyLength">Story Length</label>
+                            <select id="storyLength" class="custom-select">
+                                <option value="short">📄 Short (5-10 minutes)</option>
+                                <option value="medium" selected>📖 Medium (10-15 minutes)</option>
+                                <option value="long">📚 Long (15-20 minutes)</option>
+                            </select>
+                        </div>
+
+                        <div class="customization-section">
+                            <label for="storyMood">Story Mood</label>
+                            <select id="storyMood" class="custom-select">
+                                <option value="adventurous" selected>⚡ Adventurous & Exciting</option>
+                                <option value="calm">😌 Calm & Peaceful</option>
+                                <option value="funny">😄 Funny & Silly</option>
+                                <option value="educational">🧠 Educational & Learning</option>
+                                <option value="magical">✨ Magical & Mysterious</option>
+                            </select>
+                        </div>
+
+                        <div class="customization-section">
+                            <label>Include Pictures</label>
+                            <div class="picture-options">
+                                <label class="picture-option">
+                                    <input type="radio" name="includePictures" value="yes" checked>
+                                    <span>🎨 Yes, generate pictures</span>
+                                </label>
+                                <label class="picture-option">
+                                    <input type="radio" name="includePictures" value="no">
+                                    <span>📝 Text only</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="customization-section">
+                            <label for="artStyle">Art Style (for pictures)</label>
+                            <select id="artStyle" class="custom-select">
+                                <option value="cartoon" selected>🎨 Cartoon Style</option>
+                                <option value="watercolor">🖌️ Watercolor Painting</option>
+                                <option value="digital">💻 Digital Art</option>
+                                <option value="storybook">📚 Classic Storybook</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="storyIdea">Custom Story Idea (optional)</label>
+                        <input type="text" id="storyIdea" placeholder="e.g., meeting a friendly dragon, finding a lost treasure, helping magical creatures...">
+                        <small>💡 Or leave blank and we'll create a surprise adventure based on their interests!</small>
+                    </div>
+
+                    <div class="story-preview">
+                        <h4>Story will include:</h4>
+                        <div class="preview-items">
+                            <span class="preview-item">📚 Elements from their favorite books</span>
+                            <span class="preview-item">🎯 Their personal interests</span>
+                            <span class="preview-item">📖 Age-appropriate vocabulary</span>
+                            <span class="preview-item">🌟 Positive life lessons</span>
+                        </div>
+                    </div>
+
+                    <button id="generateStoryBtn" class="btn btn-primary full-width large">
+                        ✨ Create Magical Story ✨
+                    </button>
+                </div>
+
+                <div id="loadingSpinner" class="loading hidden">
+                    <div class="magic-animation">
+                        <div class="sparkle">✨</div>
+                        <div class="sparkle">⭐</div>
+                        <div class="sparkle">🌟</div>
+                        <div class="spinner"></div>
+                        <div class="sparkle">💫</div>
+                        <div class="sparkle">⭐</div>
+                        <div class="sparkle">✨</div>
+                    </div>
+                    <h3>Creating magical story...</h3>
+                    <p>Our AI is crafting a personalized adventure for <span class="child-name-placeholder"></span>!</p>
+                    <div class="loading-steps">
+                        <div class="step active">🎯 Analyzing interests...</div>
+                        <div class="step">📚 Selecting story elements...</div>
+                        <div class="step">✍️ Writing adventure...</div>
+                        <div class="step">🎨 Creating illustrations...</div>
+                        <div class="step">✨ Adding final magic...</div>
+                    </div>
+                </div>
+
+                <div id="storyResult" class="story-result hidden">
+                    <div class="story-header-result">
+                        <h3>📖 <span class="child-name-placeholder"></span>'s Magical Adventure</h3>
+                        <div class="story-meta">
+                            <span class="reading-time">📖 ~3 min read</span>
+                            <span class="story-date">📅 Created today</span>
+                        </div>
+                    </div>
+                    
+                    <div class="story-wrapper">
+                        <div id="storyContent" class="story-content"></div>
+                        
+                        <div class="story-footer">
+                            <div class="story-rating">
+                                <p>How did <span class="child-name-placeholder"></span> like this story?</p>
+                                <div class="rating-stars">
+                                    <span class="star" data-rating="1">⭐</span>
+                                    <span class="star" data-rating="2">⭐</span>
+                                    <span class="star" data-rating="3">⭐</span>
+                                    <span class="star" data-rating="4">⭐</span>
+                                    <span class="star" data-rating="5">⭐</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="story-actions">
+                        <button id="newStoryBtn" class="btn btn-primary">🎲 Create Another Story</button>
+                        <button class="btn btn-secondary" onclick="shareStory()">📤 Share Story</button>
+                        <button id="backToDashboardFromStory" class="btn btn-outline">← Back to Dashboard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Reader - StoryMagic</title>
+    <link rel="stylesheet" href="story-reader.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Fredoka:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="story-reader-container">
+        <!-- Loading Screen -->
+        <div id="loadingScreen" class="loading-screen">
+            <div class="loading-animation">
+                <div class="magic-sparkles">
+                    <span class="sparkle">✨</span>
+                    <span class="sparkle">⭐</span>
+                    <span class="sparkle">🌟</span>
+                    <span class="sparkle">💫</span>
+                </div>
+                <h2>Opening your magical story...</h2>
+                <div class="loading-bar">
+                    <div class="loading-progress"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Story Content -->
+        <div id="storyContent" class="story-content hidden">
+            <!-- Story will be loaded here -->
+        </div>
+
+        <!-- Reading Controls -->
+        <div id="readingControls" class="reading-controls hidden">
+            <div class="control-group">
+                <button id="fullscreenBtn" class="control-btn" title="Fullscreen">
+                    <span>⛶</span>
+                </button>
+                <button id="printBtn" class="control-btn" title="Print Story">
+                    <span>🖨️</span>
+                </button>
+                <button id="closeBtn" class="control-btn close" title="Close Story">
+                    <span>✕</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="story-reader.js"></script>
+</body>
+</html>
