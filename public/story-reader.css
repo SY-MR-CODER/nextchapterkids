@@ -423,7 +423,9 @@ body::before {
         background: white;
         border: 2px solid #ccc;
     }
-}/* ==
+}
+
+/* ==
 === MOBILE STORY READER OPTIMIZATION ===== */
 
 /* Enhanced Mobile Story Reader */
@@ -439,35 +441,35 @@ body::before {
         max-width: 100% !important;
         width: 100% !important;
     }
-    
+
     .story-container {
         padding: 1.5rem !important;
         margin: 0.5rem auto !important;
         border-radius: 15px !important;
         width: calc(100% - 1rem) !important;
     }
-    
+
     .story-header {
         margin-bottom: 2rem !important;
         padding-bottom: 1.5rem !important;
         text-align: center;
     }
-    
+
     .story-title {
         font-size: 2rem !important;
         line-height: 1.2 !important;
         margin-bottom: 1rem !important;
     }
-    
+
     .story-subtitle {
         font-size: 1.1rem !important;
         margin-bottom: 0.5rem !important;
     }
-    
+
     .story-author {
         font-size: 0.9rem !important;
     }
-    
+
     .story-text {
         font-size: 1.1rem !important;
         line-height: 1.7 !important;
@@ -476,13 +478,13 @@ body::before {
         text-align: left !important;
         max-width: 100% !important;
     }
-    
+
     .story-paragraph {
         margin-bottom: 1.5rem !important;
         text-indent: 20px !important;
         break-inside: avoid !important;
     }
-    
+
     .story-paragraph:first-child {
         font-size: 1.3rem !important;
         font-weight: 600 !important;
@@ -490,28 +492,28 @@ body::before {
         color: #ff6b9d !important;
         margin-bottom: 2rem !important;
     }
-    
+
     .story-end {
         margin-top: 3rem !important;
         padding-top: 2rem !important;
         text-align: center !important;
     }
-    
+
     .story-end h2 {
         font-size: 1.8rem !important;
         margin-bottom: 1rem !important;
     }
-    
+
     .story-end .end-emoji {
         font-size: 3rem !important;
         margin: 1rem 0 !important;
     }
-    
+
     .story-end p {
         font-size: 1rem !important;
         margin-bottom: 1rem !important;
     }
-    
+
     .reading-controls {
         bottom: 15px !important;
         left: 50% !important;
@@ -522,7 +524,7 @@ body::before {
         backdrop-filter: blur(10px) !important;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
     }
-    
+
     .control-btn {
         width: 44px !important;
         height: 44px !important;
@@ -532,12 +534,12 @@ body::before {
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
     }
-    
+
     .control-btn:active {
         transform: scale(0.95);
         transition: transform 0.1s ease;
     }
-    
+
     .page-info {
         font-size: 14px !important;
         padding: 0 10px !important;
@@ -568,32 +570,32 @@ body::before {
         padding: 1rem !important;
         margin: 0.25rem auto !important;
     }
-    
+
     .story-title {
         font-size: 1.6rem !important;
     }
-    
+
     .story-text {
         font-size: 1rem !important;
         line-height: 1.6 !important;
     }
-    
+
     .story-paragraph {
         margin-bottom: 1.2rem !important;
         text-indent: 15px !important;
     }
-    
+
     .story-paragraph:first-child {
         font-size: 1.2rem !important;
         margin-bottom: 1.5rem !important;
     }
-    
+
     .reading-controls {
         bottom: 10px !important;
         padding: 8px 12px !important;
         gap: 8px !important;
     }
-    
+
     .control-btn {
         width: 40px !important;
         height: 40px !important;
@@ -615,7 +617,7 @@ body::before {
         transform: none !important;
         box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
     }
-    
+
     .control-btn:active {
         transform: scale(0.95) !important;
         transition: transform 0.1s ease !important;
@@ -627,12 +629,12 @@ body::before {
     .story-container {
         padding: 1rem 2rem !important;
     }
-    
+
     .story-text {
         columns: 2 !important;
         column-gap: 2rem !important;
     }
-    
+
     .story-title {
         font-size: 1.8rem !important;
     }
@@ -644,7 +646,7 @@ body::before {
         font-size: 1.2rem !important;
         line-height: 1.8 !important;
     }
-    
+
     .story-paragraph:first-child {
         font-size: 1.4rem !important;
     }

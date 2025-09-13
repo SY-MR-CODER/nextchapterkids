@@ -4332,4 +4332,72 @@ istic 3D Book Styles */
     .hero-content h1 {
         font-size: 2rem !important;
     }
+}/* ===
+== BUTTON CLICK FIX ===== */
+
+/* Ensure buttons are clickable on all devices */
+.btn {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -webkit-tap-highlight-color: rgba(255, 107, 157, 0.3) !important;
+    touch-action: manipulation !important;
+}
+
+.btn:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s ease !important;
+}
+
+/* Fix for mobile button interactions */
+@media (max-width: 768px) {
+    .btn {
+        min-height: 48px !important;
+        padding: 1rem 1.5rem !important;
+        font-size: 1.1rem !important;
+        border-radius: 12px !important;
+        margin: 0.5rem 0 !important;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: rgba(255, 107, 157, 0.3) !important;
+        position: relative !important;
+        z-index: 10 !important;
+    }
+    
+    .auth-buttons {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        align-items: center !important;
+    }
+    
+    .auth-buttons .btn {
+        width: 100% !important;
+        max-width: 300px !important;
+    }
+}
+
+/* Ensure buttons work on touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .btn:hover {
+        transform: none !important;
+    }
+    
+    .btn:active {
+        transform: scale(0.95) !important;
+        background: linear-gradient(135deg, #ff6b9d, #feca57) !important;
+        transition: all 0.1s ease !important;
+    }
+}
+
+/* Debug styles - remove after testing */
+.btn {
+    border: 2px solid transparent !important;
+}
+
+.btn:focus {
+    border-color: #ff6b9d !important;
+    outline: 2px solid #ff6b9d !important;
+    outline-offset: 2px !important;
 }

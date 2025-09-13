@@ -4,16 +4,37 @@ let currentChild = null;
 
 
 // Screen Management
+// Screen Management - Make globally accessible
 function showScreen(screenId) {
+    console.log('Showing screen:', screenId);
+    
+    // Remove active class from all screens
     document.querySelectorAll('.screen').forEach(screen => {
         screen.classList.remove('active');
     });
-    document.getElementById(screenId).classList.add('active');
+    
+    // Add active class to target screen
+    const targetScreen = document.getElementById(screenId);
+    if (targetScreen) {
+        targetScreen.classList.add('active');
+        console.log('Screen activated:', screenId);
+        
+        // Scroll to top of new screen
+        window.scrollTo(0, 0);
+    } else {
+        console.error('Screen not found:', screenId);
+    }
 }
+
+// Make showScreen globally accessible
+window.showScreen = showScreen;
 
 // Initialize App
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🌟 StoryMagic App Initializing...');
+    
+    // Ensure welcome screen is shown initially
+    showScreen('welcomeScreen');
     
     // Check if user is logged in (simple session check)
     const savedUser = localStorage.getItem('currentUser');
@@ -26,7 +47,32 @@ document.addEventListener('DOMContentLoaded', function() {
         showScreen('welcomeScreen');
     }
 
-    setupEventListeners();
+    // Setup event listeners with a small delay to ensure DOM is ready
+    setTimeout(() => {
+        setupEventListeners();
+        
+        // Add backup event listeners directly to buttons
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        
+        if (loginBtn && !loginBtn.hasAttribute('data-listener-added')) {
+            loginBtn.setAttribute('data-listener-added', 'true');
+            loginBtn.onclick = function(e) {
+                e.preventDefault();
+                console.log('Login button clicked (backup handler)');
+                showScreen('loginScreen');
+            };
+        }
+        
+        if (signupBtn && !signupBtn.hasAttribute('data-listener-added')) {
+            signupBtn.setAttribute('data-listener-added', 'true');
+            signupBtn.onclick = function(e) {
+                e.preventDefault();
+                console.log('Signup button clicked (backup handler)');
+                showScreen('signupScreen');
+            };
+        }
+    }, 100);
     
     // Add a welcome message
     setTimeout(() => {
@@ -37,12 +83,29 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function setupEventListeners() {
-    // Welcome screen - Add null checks
+    // Welcome screen - Add null checks and debugging
     const loginBtn = document.getElementById('loginBtn');
     const signupBtn = document.getElementById('signupBtn');
     
-    if (loginBtn) loginBtn.addEventListener('click', () => showScreen('loginScreen'));
-    if (signupBtn) signupBtn.addEventListener('click', () => showScreen('signupScreen'));
+    console.log('Setting up event listeners...');
+    console.log('Login button found:', !!loginBtn);
+    console.log('Signup button found:', !!signupBtn);
+    
+    if (loginBtn) {
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Login button clicked');
+            showScreen('loginScreen');
+        });
+    }
+    
+    if (signupBtn) {
+        signupBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Signup button clicked');
+            showScreen('signupScreen');
+        });
+    }
 
     // Auth switching - Add null checks
     const switchToSignup = document.getElementById('switchToSignup');
@@ -1813,4 +1876,61 @@ if (isMobileDevice()) {
             }
         }
     });
+}// =====
+ DEBUGGING AND TESTING =====
+
+// Test function to verify buttons work
+function testButtons() {
+    console.log('Testing buttons...');
+    
+    const loginBtn = document.getElementById('loginBtn');
+    const signupBtn = document.getElementById('signupBtn');
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    const loginScreen = document.getElementById('loginScreen');
+    const signupScreen = document.getElementById('signupScreen');
+    
+    console.log('Elements found:');
+    console.log('- Login button:', !!loginBtn);
+    console.log('- Signup button:', !!signupBtn);
+    console.log('- Welcome screen:', !!welcomeScreen);
+    console.log('- Login screen:', !!loginScreen);
+    console.log('- Signup screen:', !!signupScreen);
+    
+    if (loginBtn) {
+        console.log('Login button classes:', loginBtn.className);
+        console.log('Login button onclick:', loginBtn.onclick);
+    }
+    
+    if (signupBtn) {
+        console.log('Signup button classes:', signupBtn.className);
+        console.log('Signup button onclick:', signupBtn.onclick);
+    }
 }
+
+// Run test after DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(testButtons, 500);
+});
+
+// Make test function globally accessible for manual testing
+window.testButtons = testButtons;
+
+// Manual button click functions for testing
+window.goToLogin = function() {
+    console.log('Manual login navigation');
+    showScreen('loginScreen');
+};
+
+window.goToSignup = function() {
+    console.log('Manual signup navigation');
+    showScreen('signupScreen');
+};
+
+// Add click event debugging
+document.addEventListener('click', function(e) {
+    if (e.target.id === 'loginBtn' || e.target.id === 'signupBtn') {
+        console.log('Button clicked:', e.target.id);
+        console.log('Event target:', e.target);
+        console.log('Current target:', e.currentTarget);
+    }
+});
