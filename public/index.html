@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -11,7 +12,24 @@
     <meta name="msapplication-TileColor" content="#ff6b9d">
     <title>NextChapterKids - Personalized AI Stories for Children</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Emergency fallback for showScreen function
+        function showScreen(screenId) {
+            console.log('Fallback showScreen called:', screenId);
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            const targetScreen = document.getElementById(screenId);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+            }
+        }
+
+        // Make it globally available immediately
+        window.showScreen = showScreen;
+    </script>
 </head>
+
 <body>
     <!-- Welcome Screen -->
     <div id="welcomeScreen" class="screen active">
@@ -19,8 +37,9 @@
             <header class="welcome-header">
                 <div class="hero-content">
                     <h1>📚 StoryMagic ✨</h1>
-                    <p class="tagline">Create personalized, AI-powered stories that make your child the hero of their own magical adventure</p>
-                    
+                    <p class="tagline">Create personalized, AI-powered stories that make your child the hero of their
+                        own magical adventure</p>
+
                     <div class="hero-illustration">
                         <div class="floating-books">
                             <span class="book">📖</span>
@@ -36,7 +55,8 @@
                         <div class="feature-card">
                             <div class="feature-icon">🎯</div>
                             <h3>Personalized Stories</h3>
-                            <p>Every story is uniquely crafted based on your child's favorite books, characters, and interests</p>
+                            <p>Every story is uniquely crafted based on your child's favorite books, characters, and
+                                interests</p>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">🤖</div>
@@ -62,17 +82,20 @@
                 <div class="testimonial-grid">
                     <div class="testimonial">
                         <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p>"My daughter Emma absolutely loves her personalized stories! She asks for a new adventure every night."</p>
+                        <p>"My daughter Emma absolutely loves her personalized stories! She asks for a new adventure
+                            every night."</p>
                         <span class="author">- Sarah M., Mom of 2</span>
                     </div>
                     <div class="testimonial">
                         <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p>"The stories are so creative and perfectly match my son's interests in dinosaurs and space. Amazing!"</p>
+                        <p>"The stories are so creative and perfectly match my son's interests in dinosaurs and space.
+                            Amazing!"</p>
                         <span class="author">- Mike D., Dad of 1</span>
                     </div>
                     <div class="testimonial">
                         <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p>"Finally, bedtime stories that my kids are excited about. The AI creates such magical adventures!"</p>
+                        <p>"Finally, bedtime stories that my kids are excited about. The AI creates such magical
+                            adventures!"</p>
                         <span class="author">- Jennifer L., Mom of 3</span>
                     </div>
                 </div>
@@ -82,8 +105,10 @@
                 <h2>Start Creating Magical Stories Today</h2>
                 <p>Join thousands of parents creating personalized adventures for their children</p>
                 <div class="auth-buttons">
-                    <button id="signupBtn" class="btn btn-primary large" onclick="showScreen('signupScreen')">🚀 Create Free Account</button>
-                    <button id="loginBtn" class="btn btn-outline large" onclick="showScreen('loginScreen')">Sign In</button>
+                    <button id="signupBtn" class="btn btn-primary large" onclick="showScreen('signupScreen')">🚀 Create
+                        Free Account</button>
+                    <button id="loginBtn" class="btn btn-outline large" onclick="showScreen('loginScreen')">Sign
+                        In</button>
                 </div>
                 <p class="free-trial">✨ Free to start • No credit card required • Unlimited stories</p>
             </div>
@@ -104,7 +129,8 @@
                         <label for="loginPassword">Password</label>
                         <input type="password" id="loginPassword" name="password" required>
                     </div>
-                    <div style="background: linear-gradient(135deg, #e6fffa, #f0fff4); padding: 10px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #2ed573;">
+                    <div
+                        style="background: linear-gradient(135deg, #e6fffa, #f0fff4); padding: 10px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #2ed573;">
                         <p style="margin: 0; font-size: 12px; color: #2d3436;">
                             <strong>🎯 Try the demo accounts:</strong><br>
                             <strong>Free Plan:</strong> <code>test@example.com</code> / <code>test123</code><br>
@@ -127,7 +153,8 @@
                 <form id="signupForm">
                     <div class="form-group">
                         <label for="parentName">Your Name</label>
-                        <input type="text" id="parentName" name="parentName" placeholder="Enter your full name" required>
+                        <input type="text" id="parentName" name="parentName" placeholder="Enter your full name"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="signupEmail">Email</label>
@@ -135,7 +162,8 @@
                     </div>
                     <div class="form-group">
                         <label for="signupPassword">Password</label>
-                        <input type="password" id="signupPassword" name="password" placeholder="Create a password" required>
+                        <input type="password" id="signupPassword" name="password" placeholder="Create a password"
+                            required>
                     </div>
                     <button type="submit" class="btn btn-primary full-width">Create Account</button>
                 </form>
@@ -152,7 +180,7 @@
                 <h2>Choose Your Plan</h2>
                 <p>Unlock more magical stories for your children</p>
             </div>
-            
+
             <div id="pricingPlans" class="pricing-grid">
                 <!-- Plans will be loaded here -->
             </div>
@@ -241,15 +269,18 @@
                     <div class="tips-grid">
                         <div class="tip">
                             <span class="tip-icon">🎯</span>
-                            <p><strong>Be Specific:</strong> The more details about your child's interests, the better the story!</p>
+                            <p><strong>Be Specific:</strong> The more details about your child's interests, the better
+                                the story!</p>
                         </div>
                         <div class="tip">
                             <span class="tip-icon">📚</span>
-                            <p><strong>Mix Favorites:</strong> Combine different books and characters for unique adventures.</p>
+                            <p><strong>Mix Favorites:</strong> Combine different books and characters for unique
+                                adventures.</p>
                         </div>
                         <div class="tip">
                             <span class="tip-icon">🌟</span>
-                            <p><strong>Try Different Themes:</strong> Explore space, underwater worlds, magical forests, and more!</p>
+                            <p><strong>Try Different Themes:</strong> Explore space, underwater worlds, magical forests,
+                                and more!</p>
                         </div>
                     </div>
                 </div>
@@ -265,11 +296,12 @@
                     <button id="backToDashboard" class="btn btn-outline">← Back</button>
                     <h2>Add Your Child</h2>
                 </div>
-                
+
                 <form id="addChildForm" class="child-form">
                     <div class="form-group">
                         <label for="childName">Child's Name</label>
-                        <input type="text" id="childName" name="childName" placeholder="Enter your child's name" required>
+                        <input type="text" id="childName" name="childName" placeholder="Enter your child's name"
+                            required>
                     </div>
 
                     <div class="form-group">
@@ -302,18 +334,22 @@
                     <div class="form-group">
                         <label for="bookSearch">Favorite Books, Movies & Shows</label>
                         <div class="book-search-container">
-                            <input type="text" id="bookSearch" placeholder="Type to search for books, movies, or shows..." autocomplete="off">
+                            <input type="text" id="bookSearch"
+                                placeholder="Type to search for books, movies, or shows..." autocomplete="off">
                             <div id="bookSuggestions" class="book-suggestions"></div>
                         </div>
                         <div id="selectedBooks" class="selected-books">
                             <!-- Selected books will appear here -->
                         </div>
-                        <small>💡 Type names like "Harry Potter", "Frozen", "Peppa Pig", etc. and click to add them</small>
+                        <small>💡 Type names like "Harry Potter", "Frozen", "Peppa Pig", etc. and click to add
+                            them</small>
                     </div>
 
                     <div class="form-group">
                         <label for="interests">What does your child love? (interests, hobbies, favorite things)</label>
-                        <textarea id="interests" name="interests" placeholder="e.g., dinosaurs, princesses, space, animals, sports, art..." rows="3"></textarea>
+                        <textarea id="interests" name="interests"
+                            placeholder="e.g., dinosaurs, princesses, space, animals, sports, art..."
+                            rows="3"></textarea>
                         <small>This helps us create more personalized stories</small>
                     </div>
 
@@ -336,12 +372,13 @@
                     <div class="story-intro">
                         <div class="child-avatar">👧</div>
                         <h3>What magical adventure should <span class="child-name-placeholder"></span> have today?</h3>
-                        <p class="story-description">Our AI will create a personalized story featuring <span class="child-name-placeholder"></span> as the brave hero!</p>
+                        <p class="story-description">Our AI will create a personalized story featuring <span
+                                class="child-name-placeholder"></span> as the brave hero!</p>
                     </div>
 
                     <div class="story-options">
                         <h4>📖 Story Customization</h4>
-                        
+
                         <div class="customization-section">
                             <label>Adventure Type</label>
                             <div class="adventure-types">
@@ -446,7 +483,8 @@
 
                     <div class="form-group">
                         <label for="storyIdea">Custom Story Idea (optional)</label>
-                        <input type="text" id="storyIdea" placeholder="e.g., meeting a friendly dragon, finding a lost treasure, helping magical creatures...">
+                        <input type="text" id="storyIdea"
+                            placeholder="e.g., meeting a friendly dragon, finding a lost treasure, helping magical creatures...">
                         <small>💡 Or leave blank and we'll create a surprise adventure based on their interests!</small>
                     </div>
 
@@ -494,10 +532,10 @@
                             <span class="story-date">📅 Created today</span>
                         </div>
                     </div>
-                    
+
                     <div class="story-wrapper">
                         <div id="storyContent" class="story-content"></div>
-                        
+
                         <div class="story-footer">
                             <div class="story-rating">
                                 <p>How did <span class="child-name-placeholder"></span> like this story?</p>
@@ -511,7 +549,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="story-actions">
                         <button id="newStoryBtn" class="btn btn-primary">🎲 Create Another Story</button>
                         <button class="btn btn-secondary" onclick="shareStory()">📤 Share Story</button>
@@ -523,5 +561,28 @@
     </div>
 
     <script src="app.js"></script>
+    <script>
+        // Verify functions are loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM loaded, checking functions...');
+            console.log('showScreen function available:', typeof window.showScreen);
+
+            // Test the buttons after a short delay
+            setTimeout(function () {
+                const loginBtn = document.getElementById('loginBtn');
+                const signupBtn = document.getElementById('signupBtn');
+                console.log('Login button found:', !!loginBtn);
+                console.log('Signup button found:', !!signupBtn);
+
+                if (loginBtn) {
+                    console.log('Login button onclick:', loginBtn.getAttribute('onclick'));
+                }
+                if (signupBtn) {
+                    console.log('Signup button onclick:', signupBtn.getAttribute('onclick'));
+                }
+            }, 100);
+        });
+    </script>
 </body>
+
 </html>

@@ -2,9 +2,7 @@
 let currentUser = null;
 let currentChild = null;
 
-
-// Screen Management
-// Screen Management - Make globally accessible
+// Screen Management - Define early so it's available for onclick handlers
 function showScreen(screenId) {
     console.log('Showing screen:', screenId);
     
@@ -26,8 +24,12 @@ function showScreen(screenId) {
     }
 }
 
-// Make showScreen globally accessible
+// Make showScreen globally accessible immediately
 window.showScreen = showScreen;
+
+
+// Screen Management
+
 
 // Initialize App
 document.addEventListener('DOMContentLoaded', function() {
@@ -1691,8 +1693,9 @@ function shareStory() {
             alert('📤 Share feature: Copy the story text and share it with friends and family!');
         }
     }
-}// ===== 
-MOBILE ENHANCEMENTS =====
+}
+
+// ===== MOBILE ENHANCEMENTS =====
 
 // Mobile-specific initialization
 document.addEventListener('DOMContentLoaded', function() {
