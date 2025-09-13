@@ -1628,4 +1628,189 @@ function shareStory() {
             alert('📤 Share feature: Copy the story text and share it with friends and family!');
         }
     }
+}// ===== 
+MOBILE ENHANCEMENTS =====
+
+// Mobile-specific initialization
+document.addEventListener('DOMContentLoaded', function() {
+    // Add mobile-specific classes
+    if (window.innerWidth <= 768) {
+        document.body.classList.add('mobile-device');
+    }
+    
+    // Prevent zoom on input focus (iOS)
+    const inputs = document.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            if (window.innerWidth <= 768) {
+                const viewport = document.querySelector('meta[name="viewport"]');
+                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+            }
+        });
+        
+        input.addEventListener('blur', function() {
+            if (window.innerWidth <= 768) {
+                const viewport = document.querySelector('meta[name="viewport"]');
+                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+            }
+        });
+    });
+    
+    // Add touch feedback for buttons
+    const buttons = document.querySelectorAll('.btn, .adventure-btn, .control-btn');
+    buttons.forEach(button => {
+        button.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.95)';
+        });
+        
+        button.addEventListener('touchend', function() {
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        });
+    });
+    
+    // Smooth scrolling for adventure types on mobile
+    const adventureContainer = document.querySelector('.adventure-types');
+    if (adventureContainer && window.innerWidth <= 768) {
+        adventureContainer.style.scrollBehavior = 'smooth';
+        adventureContainer.style.webkitOverflowScrolling = 'touch';
+    }
+    
+    // Handle orientation changes
+    window.addEventListener('orientationchange', function() {
+        setTimeout(() => {
+            // Recalculate layout after orientation change
+            window.scrollTo(0, 0);
+            
+            // Update adventure grid layout
+            const adventureTypes = document.querySelector('.adventure-types');
+            if (adventureTypes) {
+                if (window.innerHeight < window.innerWidth && window.innerWidth <= 768) {
+                    // Landscape mobile
+                    adventureTypes.style.gridTemplateColumns = 'repeat(3, 1fr)';
+                } else if (window.innerWidth <= 480) {
+                    // Portrait small mobile
+                    adventureTypes.style.gridTemplateColumns = '1fr';
+                } else if (window.innerWidth <= 768) {
+                    // Portrait mobile
+                    adventureTypes.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                }
+            }
+        }, 100);
+    });
+    
+    // Add swipe gestures for story navigation (if applicable)
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    document.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    document.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const swipeDistance = touchEndX - touchStartX;
+        
+        // Only handle swipes in story reader
+        if (window.location.pathname.includes('story-reader')) {
+            if (swipeDistance > swipeThreshold) {
+                // Swipe right - could be used for navigation
+                console.log('Swipe right detected');
+            } else if (swipeDistance < -swipeThreshold) {
+                // Swipe left - could be used for navigation
+                console.log('Swipe left detected');
+            }
+        }
+    }
+    
+    // Improve form validation feedback on mobile
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            const invalidInputs = form.querySelectorAll(':invalid');
+            if (invalidInputs.length > 0 && window.innerWidth <= 768) {
+                e.preventDefault();
+                
+                // Scroll to first invalid input
+                invalidInputs[0].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                
+                // Add visual feedback
+                invalidInputs[0].style.borderColor = '#ff6b9d';
+                invalidInputs[0].style.boxShadow = '0 0 0 3px rgba(255, 107, 157, 0.3)';
+                
+                setTimeout(() => {
+                    invalidInputs[0].style.borderColor = '';
+                    invalidInputs[0].style.boxShadow = '';
+                }, 3000);
+            }
+        });
+    });
+});
+
+// Mobile utility functions
+function isMobileDevice() {
+    return window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+function isLandscape() {
+    return window.innerHeight < window.innerWidth;
+}
+
+// Optimize performance on mobile
+if (isMobileDevice()) {
+    // Reduce animation complexity on mobile
+    document.documentElement.style.setProperty('--animation-duration', '0.2s');
+    
+    // Disable hover effects on touch devices
+    const style = document.createElement('style');
+    style.textContent = `
+        @media (hover: none) and (pointer: coarse) {
+            .btn:hover,
+            .adventure-btn:hover,
+            .feature-card:hover,
+            .child-card:hover {
+                transform: none !important;
+                box-shadow: initial !important;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Handle mobile keyboard appearance
+if (isMobileDevice()) {
+    let initialViewportHeight = window.innerHeight;
+    
+    window.addEventListener('resize', function() {
+        const currentViewportHeight = window.innerHeight;
+        const heightDifference = initialViewportHeight - currentViewportHeight;
+        
+        // If height decreased significantly, keyboard is likely open
+        if (heightDifference > 150) {
+            document.body.classList.add('keyboard-open');
+            
+            // Adjust fixed elements
+            const controls = document.querySelector('.reading-controls');
+            if (controls) {
+                controls.style.bottom = '10px';
+            }
+        } else {
+            document.body.classList.remove('keyboard-open');
+            
+            // Reset fixed elements
+            const controls = document.querySelector('.reading-controls');
+            if (controls) {
+                controls.style.bottom = '30px';
+            }
+        }
+    });
 }

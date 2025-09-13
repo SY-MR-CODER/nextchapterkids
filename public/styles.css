@@ -3964,3 +3964,372 @@ istic 3D Book Styles */
         font-size: 13px;
     }
 }
+/* =
+==== MOBILE OPTIMIZATION ===== */
+
+/* Enhanced Mobile Viewport */
+@media (max-width: 768px) {
+    /* Base Mobile Styles */
+    body {
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: rgba(255, 107, 157, 0.3);
+    }
+
+    /* Mobile Container */
+    .container {
+        padding: 0.5rem;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    /* Mobile Typography */
+    .hero-content h1 {
+        font-size: 2.2rem !important;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+
+    .tagline {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+    }
+
+    /* Mobile Buttons - Touch Friendly */
+    .btn {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+        min-height: 48px;
+        border-radius: 12px;
+        margin: 0.5rem 0;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn:active {
+        transform: scale(0.98);
+    }
+
+    /* Mobile Adventure Types - Improved */
+    .adventure-types {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.5rem !important;
+        max-height: 300px !important;
+        overflow-y: auto !important;
+        padding: 1rem !important;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+    }
+
+    .adventure-btn {
+        padding: 0.8rem 0.5rem !important;
+        font-size: 0.85rem !important;
+        min-height: 48px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        border-radius: 12px !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        line-height: 1.2 !important;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .adventure-btn:active {
+        transform: scale(0.95);
+        background: linear-gradient(135deg, #ff6b9d, #feca57) !important;
+    }
+
+    /* Mobile Forms */
+    .auth-form,
+    .child-form {
+        padding: 1.5rem !important;
+        margin: 0.5rem !important;
+        width: calc(100% - 1rem) !important;
+        max-width: none !important;
+        border-radius: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 1rem;
+        font-size: 1rem;
+        min-height: 48px;
+        border-radius: 12px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Mobile Dashboard */
+    .dashboard-header {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        text-align: center !important;
+        padding: 1rem !important;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        margin: 1rem 0 !important;
+    }
+
+    .children-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .child-card {
+        padding: 1.5rem !important;
+        margin: 0.5rem 0 !important;
+        border-radius: 20px;
+    }
+
+    .create-story-btn {
+        width: 100% !important;
+        padding: 1rem !important;
+        font-size: 1rem !important;
+        margin-top: 1rem !important;
+        min-height: 48px;
+    }
+
+    /* Mobile Story Creation */
+    .story-container {
+        padding: 1rem !important;
+    }
+
+    .story-header {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        margin-bottom: 2rem !important;
+    }
+
+    .story-header h2 {
+        font-size: 1.5rem !important;
+        text-align: center !important;
+    }
+
+    .customization-section {
+        margin-bottom: 2rem;
+    }
+
+    .customization-section label {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        display: block;
+        font-weight: 600;
+    }
+
+    /* Mobile Book Search */
+    .book-search-container {
+        position: relative;
+    }
+
+    .book-suggestions {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        max-height: 200px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .suggestion-item {
+        padding: 1rem;
+        font-size: 1rem;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        touch-action: manipulation;
+    }
+
+    .selected-books {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .selected-book {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        border-radius: 20px;
+        margin: 0.25rem;
+    }
+
+    /* Mobile Story Result */
+    .story-result {
+        padding: 1rem !important;
+        margin: 1rem 0 !important;
+        border-radius: 20px;
+    }
+
+    .story-text {
+        font-size: 1.1rem !important;
+        line-height: 1.6 !important;
+        padding: 1.5rem !important;
+    }
+
+    /* Mobile Quick Actions */
+    .action-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .action-card {
+        padding: 1.5rem !important;
+        text-align: center !important;
+        border-radius: 20px;
+    }
+
+    .tips-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .tip {
+        padding: 1rem !important;
+        text-align: center !important;
+        border-radius: 15px;
+    }
+
+    /* Mobile Features Grid */
+    .features-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        margin: 2rem 0 !important;
+    }
+
+    .feature-card {
+        padding: 1.5rem !important;
+        text-align: center !important;
+        border-radius: 20px;
+    }
+
+    .feature-icon {
+        font-size: 2.5rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    /* Mobile Testimonials */
+    .testimonial-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .testimonial {
+        padding: 1.5rem !important;
+        margin: 0.5rem 0 !important;
+        border-radius: 20px;
+    }
+
+    /* Mobile Auth Buttons */
+    .auth-buttons {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        width: 100% !important;
+    }
+
+    /* Mobile Accessibility */
+    .btn:focus,
+    .adventure-btn:focus,
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: 3px solid #ff6b9d;
+        outline-offset: 2px;
+    }
+
+    /* Mobile Scrollbars */
+    .adventure-types::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .adventure-types::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
+
+    .adventure-types::-webkit-scrollbar-thumb {
+        background: rgba(255, 107, 157, 0.5);
+        border-radius: 4px;
+    }
+
+    .adventure-types::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 107, 157, 0.7);
+    }
+}
+
+/* Extra Small Mobile Devices */
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.8rem !important;
+    }
+
+    .adventure-types {
+        grid-template-columns: 1fr !important;
+        max-height: 250px !important;
+    }
+
+    .adventure-btn {
+        padding: 1rem !important;
+        font-size: 0.95rem !important;
+    }
+
+    .container {
+        padding: 0.25rem !important;
+    }
+
+    .auth-form,
+    .child-form,
+    .story-container {
+        padding: 1rem !important;
+        margin: 0.25rem !important;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .btn:hover,
+    .adventure-btn:hover,
+    .feature-card:hover,
+    .child-card:hover {
+        transform: none;
+    }
+
+    .btn:active,
+    .adventure-btn:active {
+        transform: scale(0.95);
+        transition: transform 0.1s ease;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .adventure-types {
+        grid-template-columns: repeat(3, 1fr) !important;
+        max-height: 200px !important;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem !important;
+    }
+}
